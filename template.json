@@ -1,0 +1,77 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "hp": {
+          "value": 0,
+          "min": 0,
+          "max": 10
+        },
+        "effort": {
+          "value": 0,
+          "min": 0,
+          "max": 2
+        },
+        "biography": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
+      "abilities": {
+        "str": {
+          "value": 10
+        },
+        "dex": {
+          "value": 10
+        },
+        "con": {
+          "value": 10
+        },
+        "int": {
+          "value": 10
+        },
+        "wis": {
+          "value": 10
+        },
+        "cha": {
+          "value": 10
+        }
+      }
+    },
+    "npc": {
+      "templates": ["base"],
+      "hd": {
+        "value": 0,
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  "Item": {
+    "types": ["item", "feature", "spell"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0,
+      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+    },
+    "feature": {
+      "templates": ["base"]
+    },
+    "spell": {
+      "templates": ["base"],
+      "spellLevel": 1
+    }
+  }
+}
