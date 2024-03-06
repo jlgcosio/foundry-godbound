@@ -42,7 +42,7 @@ export class GodboundActor extends Actor {
    * Prepare Character type specific data
    */
   _prepareCharacterData(actorData) {
-    if (actorData.type !== 'character') return;
+    if (actorData.type !== "character") return;
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
@@ -50,15 +50,44 @@ export class GodboundActor extends Actor {
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
       // Calculate the modifier using d20 rules.
-      ability.mod = Math.floor((ability.value - 10) / 2);
+      ability.mod = this._computePcModifier(ability.value);
+      ability.check = 21 - ability.value;
     }
+
+    const hardinessMod =
+      systemData.saves.hardiness.source === "str"
+        ? systemData.abilities.str.mod
+        : systemData.abilities.con.mod;
+    const evasionMod =
+      systemData.saves.evasion.source === "dex"
+        ? systemData.abilities.dex.mod
+        : systemData.abilities.int.mod;
+    const spiritMod =
+      systemData.saves.spirit.source === "wis"
+        ? systemData.abilities.wis.mod
+        : systemData.abilities.cha.mod;
+
+    systemData.saves = {
+      hardiness: {
+        ...systemData.saves.hardiness,
+        base: 16 - systemData.attributes.level.value - hardinessMod,
+      },
+      evasion: {
+        ...systemData.saves.evasion,
+        base: 16 - systemData.attributes.level.value - evasionMod,
+      },
+      spirit: {
+        ...systemData.saves.spirit,
+        base: 16 - systemData.attributes.level.value - spiritMod,
+      },
+    };
   }
 
   /**
    * Prepare NPC type specific data.
    */
   _prepareNpcData(actorData) {
-    if (actorData.type !== 'npc') return;
+    if (actorData.type !== "npc") return;
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
@@ -83,7 +112,7 @@ export class GodboundActor extends Actor {
    * Prepare character roll data.
    */
   _getCharacterRollData(data) {
-    if (this.type !== 'character') return;
+    if (this.type !== "character") return;
 
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
@@ -103,8 +132,33 @@ export class GodboundActor extends Actor {
    * Prepare NPC roll data.
    */
   _getNpcRollData(data) {
-    if (this.type !== 'npc') return;
+    if (this.type !== "npc") return;
 
     // Process additional NPC data here.
+  }
+
+  /**
+   *
+   * @param {number} abilityScore
+   * @returns {number}
+   */
+  _computePcModifier(abilityScore = 10) {
+    if (abilityScore <= 3) {
+      return -3;
+    } else if (abilityScore >= 4 && abilityScore <= 5) {
+      return -2;
+    } else if (abilityScore >= 6 && abilityScore <= 8) {
+      return -1;
+    } else if (abilityScore >= 9 && abilityScore <= 12) {
+      return 0;
+    } else if (abilityScore >= 13 && abilityScore <= 15) {
+      return 1;
+    } else if (abilityScore >= 16 && abilityScore <= 17) {
+      return 2;
+    } else if (abilityScore == 18) {
+      return 3;
+    } else if (abilityScore >= 19) {
+      return 4;
+    }
   }
 }

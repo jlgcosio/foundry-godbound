@@ -30,9 +30,13 @@
   "TYPES": {
     "Actor": {
       "character": "Character",
-      "npc": "NPC"
+      "npc": "NPC",
+      "faction": "Faction"
     },
     "Item": {
+      "word": "Word",
+      "gift": "Gift",
+      "theurgy": "Theurgy",
       "item": "Item",
       "feature": "Feature",
       "spell": "Spell"

@@ -1,18 +1,20 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["character", "npc", "faction"],
     "templates": {
       "base": {
+        "description": ""
+      },
+      "char": {
         "effort": {
           "value": 0,
           "min": 0,
-          "max": 2
-        },
-        "biography": ""
+          "max": 0
+        }
       }
     },
     "character": {
-      "templates": ["base"],
+      "templates": ["base", "char"],
       "hp": {
         "value": 0,
         "min": 0,
@@ -42,19 +44,53 @@
         "cha": {
           "value": 10
         }
+      },
+      "saves": {
+        "hardiness": {
+          "source": "str"
+        },
+        "evasion": {
+          "source": "dex"
+        },
+        "spirit": {
+          "source": "wis"
+        }
+      },
+      "resources": {
+        "influence": {
+          "value": 2,
+          "max": 2
+        },
+        "dominion": {
+          "value": 0
+        },
+        "wealth": {
+          "value": 0
+        }
       }
     },
     "npc": {
-      "templates": ["base"],
+      "templates": ["base", "char"],
       "hd": {
         "value": 0,
         "min": 0,
         "max": 1
+      },
+      "attributes": {
+        "atk": 0,
+        "ac": 0,
+        "save": 15
       }
+    },
+    "faction": {
+      "tempates": ["base"],
+      "power": 6,
+      "features": [],
+      "problems": []
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": ["word", "gift", "theurgy", "item", "feature", "spell"],
     "templates": {
       "base": {
         "description": ""
@@ -72,6 +108,26 @@
     "spell": {
       "templates": ["base"],
       "spellLevel": 1
+    },
+    "gift": {
+      "templates": ["base"],
+      "type": "lesser",
+      "activation": "action",
+      "cost": 0,
+      "cost_type": "toggle"
+    },
+    "word": {
+      "templates": ["base"],
+      "passive": ""
+    },
+    "theurgy": {
+      "templates": ["base"],
+      "learn": "1 week",
+      "cast": {
+        "slow": "1 hour",
+        "quick": "1 round",
+        "instant": "1d6 damage die"
+      }
     }
   }
 }
