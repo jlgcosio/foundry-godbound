@@ -1,4 +1,14 @@
 // Flexbox.
+.flex {
+  display: flex;
+}
+
+@for $i from 1 through 12 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
+
 .flexcol,
 .flexrow {
   gap: 5px
