@@ -49,7 +49,11 @@ export class GodboundActor extends Actor {
 
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
-      // Calculate the modifier using d20 rules.
+      // Clean up ability scores because of bug where ability.value turns into an array when sheet window width is smallest possible size
+      console.log(ability);
+      ability.value =
+        typeof ability.value !== "number" ? ability.value[0] : ability.value;
+
       ability.mod = this._computePcModifier(ability.value);
       ability.check = 21 - ability.value;
     }
