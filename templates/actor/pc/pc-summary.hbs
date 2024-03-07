@@ -1,0 +1,24 @@
+<section class="main p-4">
+    <div class="grid grid-3col">
+        <div class="abilities flex-col">
+            <div class="flexrow">
+                <div class="flex-2 text-center">Ability Scores</div>
+                <div class="flex-1 text-center">Modifier</div>
+            </div>
+            {{#each system.abilities as |ability key|}}
+                <div class="ability flexrow flex-group-center">
+                    <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{ability.label}}</label>
+                    <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+                    <span class="ability-mod" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                </div>
+            {{/each}}
+        </div>
+        <div class="">
+            test
+        </div>
+        <div class="">
+            test 2
+        </div>
+    </div>
+    
+</section>

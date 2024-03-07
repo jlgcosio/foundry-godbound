@@ -12,13 +12,13 @@ export class GodboundActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["foundry-godbound", "sheet", "actor"],
-      width: 600,
+      width: 800,
       height: 600,
       tabs: [
         {
           navSelector: ".sheet-tabs",
           contentSelector: ".sheet-body",
-          initial: "features",
+          initial: "summary",
         },
       ],
     });
@@ -217,11 +217,12 @@ export class GodboundActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+  async _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
 
+    console.log(dataset);
     // Handle item rolls.
     if (dataset.rollType) {
       if (dataset.rollType == "item") {
@@ -233,9 +234,10 @@ export class GodboundActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      console.log(dataset);
       let label = dataset.label ? `[ability] ${dataset.label}` : "";
       let roll = new Roll(dataset.roll, this.actor.getRollData());
+      // const result = await roll.evaluate();
+      // console.log(result.total);
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
