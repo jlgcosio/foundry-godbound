@@ -21,13 +21,13 @@
       "thumbnail": "systems/foundry-godbound/assets/anvil-impact.png"
     }
   ],
-  "version": "1.3.0",
+  "version": "0.0.1",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"
   },
   "esmodules": ["module/foundry-godbound.mjs"],
-  "styles": ["css/foundry-godbound.css"],
+  "styles": ["css/foundry-godbound.css", "css/foundry-godbound-extra.css"],
   "languages": [
     {
       "lang": "en",

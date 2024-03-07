@@ -23,7 +23,8 @@
       "attributes": {
         "level": {
           "value": 1
-        }
+        },
+        "fray": "1d8"
       },
       "abilities": {
         "str": {
@@ -67,6 +68,12 @@
         "wealth": {
           "value": 0
         }
+      },
+      "facts": {
+        "origin": "",
+        "past_career": "",
+        "relationship": "",
+        "others": ""
       }
     },
     "npc": {
