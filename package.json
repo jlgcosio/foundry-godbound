@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CSS compiler for the Godbound system",
   "scripts": {
-    "build": "sass src/scss/foundry-godbound.scss css/foundry-godbound.css --style=expanded --no-source-map && npx tailwindcss -i src/foundry-tailwind.css -o css/foundry-godbound-extra.css ",
+    "build": "sass src/scss/foundry-godbound.scss css/foundry-godbound.css --style=expanded --no-source-map",
     "watch": "sass src/scss/foundry-godbound.scss css/foundry-godbound.css --style=expanded --source-map --watch"
   },
   "browserslist": [
@@ -13,7 +13,6 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "sass": "^1.53.0",
-    "tailwindcss": "^3.4.1"
+    "sass": "^1.53.0"
   }
 }

@@ -27,7 +27,7 @@
     "verified": "11.315"
   },
   "esmodules": ["module/foundry-godbound.mjs"],
-  "styles": ["css/foundry-godbound.css", "css/foundry-godbound-extra.css"],
+  "styles": ["css/foundry-godbound.css"],
   "languages": [
     {
       "lang": "en",
