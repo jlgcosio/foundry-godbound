@@ -112,6 +112,7 @@
     "gift": {
       "templates": ["base"],
       "type": "lesser",
+      "word": "",
       "activation": "action",
       "cost": 0,
       "cost_type": "toggle"
