@@ -22,7 +22,7 @@ export class GodboundActorSheet extends ActorSheet {
           initial: "summary",
         },
       ],
-      resizable: false,
+      resizable: true,
     });
   }
 

@@ -2,35 +2,37 @@
     <div class="grid grid-3col">
         <div class="flexcol">
             <div class="flexrow">
-                <div class="flex-2 text-center">
+                <div class="flex-2 text-center flexcol">
                     <h3>
                         Ability Scores
                     </h3>
+                    {{#each system.abilities as |ability key|}}
+                        <div class="flex-2 text-center">
+                            <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left flex-2" data-roll-type="abilityCheck" data-label="{{ability.label}} Check">{{ability.label}}</label>
+                        </div>
+                    {{/each}}
                 </div>
-                <div class="flex-1 text-center">
+                <div class="flex-1 text-center flexcol">
                     <h3>
                         Modifier
                     </h3>
+                     {{#each system.abilities as |ability key|}}
+                        <div class="flex-1 text-center">
+                            <span class="ability-mod flex-1">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        </div>
+                    {{/each}}
                 </div>
-                <div class="flex-1 text-center">
+                <div class="flex-1 text-center flexcol">
                     <h3>
                         Check
                     </h3>
+                    {{#each system.abilities as |ability key|}}
+                        <div class="flex-1 text-center">
+                            <span class="ability-check flex-1" >{{ability.check}}</span>
+                        </div>
+                     {{/each}}
                 </div>
             </div>
-            {{#each system.abilities as |ability key|}}
-                <div class="ability flexrow flex-group-center">
-                    <div class="flex-2 text-center">
-                        <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left flex-2" data-roll-type="abilityCheck" data-label="{{ability.label}} Check">{{ability.label}}</label>
-                    </div>
-                    <div class="flex-1 text-center">
-                        <span class="ability-mod flex-1">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                    </div>
-                    <div class="flex-1 text-center">
-                        <span class="ability-check flex-1" >{{ability.check}}</span>
-                    </div>
-                </div>
-            {{/each}}
         </div>
 
 
