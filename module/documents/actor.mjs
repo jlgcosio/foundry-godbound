@@ -1,3 +1,5 @@
+import { GODBOUND } from "../helpers/config.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -76,14 +78,44 @@ export class GodboundActor extends Actor {
       hardiness: {
         ...systemData.saves.hardiness,
         base: 16 - systemData.attributes.level.value - hardinessMod,
+        options: [
+          {
+            value: "str",
+            label: game.i18n.localize(GODBOUND.abilities.str),
+          },
+          {
+            value: "con",
+            label: game.i18n.localize(GODBOUND.abilities.con),
+          },
+        ],
       },
       evasion: {
         ...systemData.saves.evasion,
         base: 16 - systemData.attributes.level.value - evasionMod,
+        options: [
+          {
+            value: "dex",
+            label: game.i18n.localize(GODBOUND.abilities.dex),
+          },
+          {
+            value: "int",
+            label: game.i18n.localize(GODBOUND.abilities.int),
+          },
+        ],
       },
       spirit: {
         ...systemData.saves.spirit,
         base: 16 - systemData.attributes.level.value - spiritMod,
+        options: [
+          {
+            value: "wis",
+            label: game.i18n.localize(GODBOUND.abilities.wis),
+          },
+          {
+            value: "cha",
+            label: game.i18n.localize(GODBOUND.abilities.cha),
+          },
+        ],
       },
     };
   }

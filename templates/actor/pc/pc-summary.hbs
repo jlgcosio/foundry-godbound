@@ -24,7 +24,7 @@
                             Attributes
                         </h3>
                         {{#each system.abilities as |ability key|}}
-                            <div class="flex-2 text-center">
+                            <div class="text-center">
                                 <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left flex-2" data-ability="{{key}}" data-roll-type="abilityCheck" data-label="{{ability.label}} check">{{ability.label}}</label>
                             </div>
                         {{/each}}
@@ -34,7 +34,7 @@
                             Modifier
                         </h3>
                         {{#each system.abilities as |ability key|}}
-                            <div class="flex-1 text-center">
+                            <div class=" text-center">
                                 <span class="ability-mod flex-1">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                             </div>
                         {{/each}}
@@ -44,7 +44,7 @@
                             Check
                         </h3>
                         {{#each system.abilities as |ability key|}}
-                            <div class="flex-1 text-center">
+                            <div class="text-center">
                                 <span class="ability-check flex-1" >{{ability.check}}</span>
                             </div>
                         {{/each}}
@@ -61,27 +61,29 @@
                             Type
                         </h3>
                         {{#each system.saves as |save key|}}
-                            <div class="flex-2 text-center">
-                                <label for="system.saves.{{key}}" class="resource-label rollable align-left flex-2">{{save.label}}</label>
+                            <div class="flex flex-2 text-center flex-group-center">
+                                <label for="system.saves.{{key}}" class="resource-label rollable flex-2">{{save.label}}</label>
                             </div>
                         {{/each}}
                     </div>
                     <div class="flex-1 text-center flexcol">
                         <h3>
-                            Modifier
+                            Source
                         </h3>
                         {{#each system.saves as |save key|}}
                             <div class="flex-1 text-center">
-                                <span class="saving-throw-source flex-1">{{numberFormat save.base decimals=0 sign=true}}</span>
+                                <select class="saving-throw-source w-full" name="system.saves.{{key}}.source" value="{{save.source}}">
+                                    {{#each save.options as |option|}}
+                                        <option value="{{option.value}}">{{option.label}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         {{/each}}
                     </div>
                     <div class="flex-1 text-center flexcol">
-                        <h3>
-                            Save
-                        </h3>
+                        <h3 style="flex: 0;">Save</h3>
                         {{#each system.saves as |save key|}}
-                            <div class="flex-1 text-center">
+                            <div class="flex flex-1 text-center flex-group-center">
                                 <span class="saving-throw-final flex-1" >{{save.base}}</span>
                             </div>
                         {{/each}}
