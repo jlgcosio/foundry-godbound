@@ -224,11 +224,34 @@ export class GodboundActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
-    console.log(dataset, element);
     if (dataset.rollType) {
       switch (dataset.rollType) {
         case GODBOUND.rollTypes.abilityCheck:
-          console.log("roll ability check");
+          let actor = this.actor.getRollData();
+          let roll = new Roll(`1d20+@abilities.${dataset.ability}.mod`, actor);
+
+          const result = await roll.evaluate();
+          const resultDesc =
+            result.total >= actor.abilities[dataset.ability].check
+              ? `<p class="color-success">Success!</p>`
+              : `<p class="color-error">Failed!</p>`;
+
+          const msg = `
+                <div>
+                  <b>${dataset.label} required:</b>  ${
+            actor.abilities[dataset.ability].check
+          } 
+                </div>
+                <div>
+                  ${resultDesc}
+                </div>
+              `;
+
+          roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: msg,
+            rollMode: game.settings.get("core", "rollMode"),
+          });
           break;
         case GODBOUND.rollTypes.item:
           const itemId = element.closest(".item").dataset.itemId;
@@ -238,23 +261,6 @@ export class GodboundActorSheet extends ActorSheet {
         default:
           return;
       }
-
-      if (dataset.rollType == "item") {
-      }
-    }
-
-    // Handle rolls that supply the formula directly.
-    if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : "";
-      let roll = new Roll(dataset.roll, this.actor.getRollData());
-      // const result = await roll.evaluate();
-      // console.log(result.total);
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label,
-        rollMode: game.settings.get("core", "rollMode"),
-      });
-      return roll;
     }
   }
 }

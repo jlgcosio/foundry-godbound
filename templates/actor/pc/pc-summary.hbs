@@ -1,14 +1,27 @@
 <section class="main p-4">
+    {{!-- Set ability scores --}}
+    <div class="grid grid-6col">
+        {{#each system.abilities as |ability key|}}
+            <div class="ability flex-col">
+                <label for="system.abilities.{{key}}.value" class="resource-label">{{ability.label}}</label>
+                <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+            </div>
+        {{/each}}
+    </div>
+
+
     <div class="grid grid-3col">
+        
         <div class="flexcol">
+            {{!-- Display modifiers and check --}}
             <div class="flexrow">
                 <div class="flex-2 text-center flexcol">
                     <h3>
-                        Ability Scores
+                        Attributes
                     </h3>
                     {{#each system.abilities as |ability key|}}
                         <div class="flex-2 text-center">
-                            <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left flex-2" data-roll-type="abilityCheck" data-label="{{ability.label}} Check">{{ability.label}}</label>
+                            <label for="system.abilities.{{key}}.value" class="resource-label rollable align-left flex-2" data-ability="{{key}}" data-roll-type="abilityCheck" data-label="{{ability.label}} check">{{ability.label}}</label>
                         </div>
                     {{/each}}
                 </div>
@@ -33,6 +46,8 @@
                      {{/each}}
                 </div>
             </div>
+
+
         </div>
 
 

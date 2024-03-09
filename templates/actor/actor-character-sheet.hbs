@@ -60,14 +60,7 @@
   <section class="sheet-body">
 
     <div class="tab summary" data-group="primary" data-tab="summary">
-      <div class="grid grid-6col">
-        {{#each system.abilities as |ability key|}}
-            <div class="ability flex-col">
-                <label for="system.abilities.{{key}}.value" class="resource-label">{{ability.label}}</label>
-                <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-            </div>
-        {{/each}}
-      </div>
+      
       {{> "systems/foundry-godbound/templates/actor/pc/pc-summary.hbs"}}
     </div>
 
