@@ -26,3 +26,9 @@ GODBOUND.rollTypes = {
   abilityCheck: "abilityCheck",
   item: "item",
 };
+
+GODBOUND.saves = {
+  hardiness: "GODBOUND.Saves.Hardiness",
+  evasion: "GODBOUND.Saves.Evasion",
+  spirit: "GODBOUND.Saves.Spirit",
+};

@@ -8,6 +8,11 @@
       "Wis": { "long": "Wisdom", "abbr": "wis" },
       "Cha": { "long": "Charisma", "abbr": "cha" }
     },
+    "Saves": {
+      "Hardiness": "Hardiness",
+      "Evasion": "Evasion",
+      "Spirit": "Spirit"
+    },
     "SheetLabels": {
       "Actor": "Godbound Actor Sheet",
       "Item": "Godbound Item Sheet"

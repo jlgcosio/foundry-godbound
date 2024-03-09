@@ -84,6 +84,11 @@ export class GodboundActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.GODBOUND.abilities[k]) ?? k;
     }
+
+    for (let [k, v] of Object.entries(context.system.saves)) {
+      console.log(CONFIG.GODBOUND.saves[k]);
+      v.label = game.i18n.localize(CONFIG.GODBOUND.saves[k]) ?? k;
+    }
   }
 
   /**
