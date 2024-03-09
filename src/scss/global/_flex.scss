@@ -3,6 +3,18 @@
   display: flex;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 @for $i from 1 through 12 {
   .flex-#{$i} {
     flex: $i;
@@ -58,4 +70,10 @@
 .align-center {
   justify-content: center;
   text-align: center;
+}
+
+@for $i from 1 through 16 {
+  .gap-#{$i} {
+    gap: #{i}px;
+  }
 }

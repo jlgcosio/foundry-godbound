@@ -49,8 +49,9 @@ export class GodboundActor extends Actor {
 
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
+      // In case of null caused by non-number input
+      ability.value = ability.value ?? 10;
       // Clean up ability scores because of bug where ability.value turns into an array when sheet window width is smallest possible size
-      console.log(ability);
       ability.value =
         typeof ability.value !== "number" ? ability.value[0] : ability.value;
 

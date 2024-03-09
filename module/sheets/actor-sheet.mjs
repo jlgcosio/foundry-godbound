@@ -2,6 +2,7 @@ import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
 } from "../helpers/effects.mjs";
+import { GODBOUND } from "../helpers/config.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -13,7 +14,7 @@ export class GodboundActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["foundry-godbound", "sheet", "actor"],
       width: 800,
-      height: 600,
+      height: 720,
       tabs: [
         {
           navSelector: ".sheet-tabs",
@@ -21,6 +22,7 @@ export class GodboundActorSheet extends ActorSheet {
           initial: "summary",
         },
       ],
+      resizable: false,
     });
   }
 
@@ -222,13 +224,22 @@ export class GodboundActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
-    console.log(dataset);
-    // Handle item rolls.
+    console.log(dataset, element);
     if (dataset.rollType) {
+      switch (dataset.rollType) {
+        case GODBOUND.rollTypes.abilityCheck:
+          console.log("roll ability check");
+          break;
+        case GODBOUND.rollTypes.item:
+          const itemId = element.closest(".item").dataset.itemId;
+          const item = this.actor.items.get(itemId);
+          if (item) return item.roll();
+          break;
+        default:
+          return;
+      }
+
       if (dataset.rollType == "item") {
-        const itemId = element.closest(".item").dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
       }
     }
 
