@@ -231,40 +231,58 @@ export class GodboundActorSheet extends ActorSheet {
     if (dataset.rollType) {
       switch (dataset.rollType) {
         case GODBOUND.rollTypes.abilityCheck:
-          let actor = this.actor.getRollData();
-          let roll = new Roll(`1d20+@abilities.${dataset.ability}.mod`, actor);
-
-          const result = await roll.evaluate();
-          const resultDesc =
-            result.total >= actor.abilities[dataset.ability].check
-              ? `<p class="color-success">Success!</p>`
-              : `<p class="color-error">Failed!</p>`;
-
-          const msg = `
-                <div>
-                  <b>${dataset.label} required:</b>  ${
-            actor.abilities[dataset.ability].check
-          } 
-                </div>
-                <div>
-                  ${resultDesc}
-                </div>
-              `;
-
-          roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: msg,
-            rollMode: game.settings.get("core", "rollMode"),
-          });
+          this.rollCheck(this.actor.getRollData(), dataset);
           break;
         case GODBOUND.rollTypes.item:
-          const itemId = element.closest(".item").dataset.itemId;
-          const item = this.actor.items.get(itemId);
-          if (item) return item.roll();
+          this.rollItem(element);
           break;
         default:
           return;
       }
     }
+  }
+
+  /**
+   *
+   * @param {Actor} actor
+   * @param {object} dataset
+   *
+   */
+  async rollCheck(actor, dataset) {
+    let roll = new Roll(`1d20+@abilities.${dataset.ability}.mod`, actor);
+
+    const result = await roll.evaluate();
+    const resultDesc =
+      result.total >= actor.abilities[dataset.ability].check
+        ? `<p class="color-success">Success!</p>`
+        : `<p class="color-error">Failed!</p>`;
+
+    const msg = `
+          <div>
+            <b>${dataset.label} required:</b>  ${
+      actor.abilities[dataset.ability].check
+    } 
+          </div>
+          <div>
+            ${resultDesc}
+          </div>
+        `;
+
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: msg,
+      rollMode: game.settings.get("core", "rollMode"),
+    });
+  }
+
+  /**
+   *
+   * @param {EventTarget | null} element
+   * @returns
+   */
+  rollItem(element = null) {
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    if (item) return item.roll();
   }
 }
